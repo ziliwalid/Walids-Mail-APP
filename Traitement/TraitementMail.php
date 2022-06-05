@@ -15,6 +15,10 @@ switch ($action) {
         header('location:../GUI/Message.php');
     ;
     break;
+    case  "delete":
+        User::deleteMail($_GET['id']) ;
+        header('location:../GUI/sentMails.php');
+        break;
     case "logout":
         session_start();
         unset($_SESSION["clog"]);

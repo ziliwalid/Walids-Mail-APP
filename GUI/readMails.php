@@ -7,6 +7,15 @@ while ($row = $getID->fetch()){
     $id=$row[0];
     $name=$row[1];
 }
+function colorStatus($etat)
+{
+    if($etat==1){
+        return "spinner-grow text-success";
+    }
+    if($etat==0){
+        return "spinner-grow text-danger";
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,7 +36,7 @@ while ($row = $getID->fetch()){
                     <div class="row">
                         <!-- BEGIN INBOX MENU -->
                         <div class="col-md-3">
-                            <h2 class="grid-title"><span style="color: #fe302f"><?=$name?></span> Here's your<br> <i class="fa fa-inbox"></i> Inbox</h2><br>
+                            <h2 class="grid-title"><span style="color: #fe302f"><?=$name?></span> Here's your<br> <i class="fa-solid fa-envelope-circle-check"></i> Read E-mails</h2><br>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="fa fa-pencil"></i>&nbsp;&nbsp;NEW MESSAGE
                             </button>
@@ -83,12 +92,10 @@ while ($row = $getID->fetch()){
                                     while ($row = $data->fetch()){
                                         ?>
                                         <tr onclick="window.location.href='./MailDetails.php?id=<?=$row[0]?>'">
-                                            <td class="action"><input type="checkbox" /></td>
-                                            <td class="action"><i class="fa fa-star-o"></i></td>
-                                            <td class="action"><i class="fa fa-bookmark-o"></i></td>
                                             <td class="name"><a href="#"><?=$row[8]?></a></td>
                                             <td class="subject"><a href="#"><?=$row[4]?></a></td>
                                             <td class="time"><?=$row[3]?></td>
+                                            <td><div class="<?=colorStatus($row[5])?>"></div></td>
                                         </tr>
                                     <?php }?>
 

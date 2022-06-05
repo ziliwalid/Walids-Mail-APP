@@ -34,6 +34,10 @@ class User
             WHERE user.id = message.sender and message.sender!='$sender' and message.etat='$etat';";
         return Dataaccess::selection($req);
     }
+    public static function updateStatustoRead($id){
+        $req="UPDATE `message` SET `etat`=1 WHERE id='$id'";
+        return Dataaccess::majour($req);
+    }
     public static  function  sendMails($addr_exp,$sujet,$date_envoie,$contenue,$sender){
         $req="INSERT INTO `message`(`adress_exp`, `sujet`, `date_envoie`, `contenue`, `etat`, `sender`) VALUES ('$addr_exp','$sujet','$date_envoie','$contenue','0','$sender')";
         return Dataaccess::majour($req);
@@ -41,6 +45,10 @@ class User
     public static function getNameAndID($mail){
         $req="select id, nom from user where `mail`='$mail'";
         return Dataaccess::selection($req);
+    }
+    public static function deleteMail($id){
+        $req="DELETE FROM `message` WHERE id='$id'";
+        return Dataaccess::majour($req);
     }
 
 }

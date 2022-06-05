@@ -7,7 +7,17 @@ while ($row = $getID->fetch()){
     $id=$row[0];
     $name=$row[1];
 }
+function colorStatus($etat)
+{
+    if($etat==1){
+        return "spinner-grow text-success";
+    }
+    if($etat==0){
+        return "spinner-grow text-danger";
+    }
+}
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -83,12 +93,10 @@ while ($row = $getID->fetch()){
                                     while ($row = $data->fetch()){
                                     ?>
                                     <tr onclick="window.location.href='./MailDetails.php?id=<?=$row[0]?>'">
-                                        <td class="action"><input type="checkbox" /></td>
-                                        <td class="action"><i class="fa fa-star-o"></i></td>
-                                        <td class="action"><i class="fa fa-bookmark-o"></i></td>
                                         <td class="name"><a href="#"><?=$row[8]?></a></td>
                                         <td class="subject"><a href="#"><?=$row[4]?></a></td>
                                         <td class="time"><?=$row[3]?></td>
+                                        <td><div class="<?=colorStatus($row[5])?>"></div></td>
                                     </tr>
                                     <?php }?>
 

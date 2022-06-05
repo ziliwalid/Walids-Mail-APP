@@ -66,17 +66,24 @@ while ($row = $getID->fetch()){
                                     <?php
                                     $data=User::showmailDetail($_GET['id']);
                                     while ($row = $data->fetch()){
+                                        $status=$row[5];
+                                        $msgID=$row[0];
                                         ?>
                                         <tr>
-                                            <td class="subject"><a href="#"><?=$row[2]?></a></td>
+                                            <td class="subject"><span style="color: #fe302f"><?=$row[2]?></span></td>
                                         </tr>
                                         <tr>
-                                            <td class="subject"><a href="#"><?=$row[4]?></a></td>
+                                            <td class="subject"><?=$row[4]?></td>
                                         </tr>
                                         <tr>
-                                            <td class="time">sent to <?=$row[1]?> <span class="float-end"><?=$row[3]?></span></td>
+                                            <td class="time">sent to <span style="color: #fe302f"><?=$row[1]?></span> <p class="float-end">sent on: <span style="color: #fe302f"><?=$row[3]?></span></p></td>
                                         </tr>
-                                    <?php }?>
+                                    <?php }
+                                        if ($status==0){
+                                            User::updateStatustoRead($msgID);
+                                        }
+
+                                    ?>
 
                                     </tbody></table>
                             </div>
